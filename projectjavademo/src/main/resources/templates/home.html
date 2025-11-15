@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QUOCTRUONGSHOP - Thời Trang Sành Điệu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <header class="site-header">
+    <div class="container header-inner">
+        <div class="brand">
+            <a th:href="@{/}">
+                <i class="fas fa-tshirt"></i>
+                QUOCSHOP
+            </a>
+        </div>
+        <nav class="main-nav">
+            <a th:href="@{/}" class="active">
+                <i class="fas fa-home"></i> Trang chủ
+            </a>
+            <a href="#">
+                <i class="fas fa-male"></i> Nam
+            </a>
+            <a href="#">
+                <i class="fas fa-female"></i> Nữ
+            </a>
+            <a href="#" class="sale">
+                <i class="fas fa-tags"></i> Khuyến mãi
+            </a>
+        </nav>
+        <div class="actions">
+            <form th:action="@{/products/search}" method="get" class="search-form">
+    <button type="submit" class="search-button">
+        <i class="fas fa-search"></i>
+    </button>
+    <input type="search" name="keyword" placeholder="Search products..." autocomplete="off"/>
+    <div class="search-dropdown">
+        <div class="search-dropdown-header">
+            <h3>Advanced Search</h3>
+            <button type="button" class="close-search-dropdown">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-dropdown-content">
+            <div class="search-field">
+                <label>Category</label>
+                <select name="category">
+                    <option value="">All Categories</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="books">Books</option>
+                    <option value="home">Home & Garden</option>
+                    <option value="toys">Toys</option>
+                </select>
+            </div>
+            <div class="search-field">
+                <label>Price Range</label>
+                <div class="price-inputs">
+                    <input type="number" name="minPrice" placeholder="Min Price" step="0.01"/>
+                    <span class="price-separator">-</span>
+                    <input type="number" name="maxPrice" placeholder="Max Price" step="0.01"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+            <a class="cart" href="#">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </a>
+            <div class="auth-buttons">
+                <a class="btn-login" th:href="@{/login}">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </a>
+                <a class="btn-logout" th:href="@{/logout}">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container main-content">
+    <section class="hero">
+        <div class="hero-text">
+            <span class="hero-label">🌟 Bộ Sưu Tập Mới</span>
+            <h1>Xu Hướng Thời Trang 2025</h1>
+            <p>Khám phá bộ sưu tập mới nhất với những thiết kế độc đáo, phong cách và chất lượng. Giảm giá đặc biệt cho thành viên mới.</p>
+            <div class="hero-buttons">
+                <a class="btn-primary" href="#">
+                    <i class="fas fa-shopping-bag"></i> Mua sắm ngay
+                </a>
+                <a class="btn-outline" href="#">
+                    <i class="fas fa-info-circle"></i> Tìm hiểu thêm
+                </a>
+            </div>
+            <div class="hero-features">
+                <span><i class="fas fa-truck"></i> Giao hàng miễn phí</span>
+                <span><i class="fas fa-undo"></i> Đổi trả trong 30 ngày</span>
+                <span><i class="fas fa-shield-alt"></i> Bảo hành chất lượng</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://th.bing.com/th/id/R.65b3f748545d2acf7ef4ec31b12d7299?rik=7Q%2fpothCcI5PQg&pid=ImgRaw&r=0" alt="fashion" />
+        </div>
+    </section>
+
+    <section class="products">
+        <h2><i class="fas fa-star"></i> Sản Phẩm Nổi Bật</h2>
+        <div class="product-grid">
+            <!-- Product card 1 -->
+            <article class="product-card">
+                <div class="product-badge">Mới</div>
+                <img src="https://tse3.mm.bing.net/th/id/OIP.wSp1YV0Opy0v3Agf0rpIUwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="T-shirt 1" />
+                <h3>Áo Thun Basic</h3>
+                <p class="price">199.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Trắng • <i class="fas fa-tshirt"></i> S/M/L</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 2 -->
+            <article class="product-card">
+                <div class="product-badge hot">Hot</div>
+                <img src="https://th.bing.com/th/id/R.3514c6174483e5519be0d00df1432bb6?rik=v5%2ftU0lU2OGRtw&pid=ImgRaw&r=0" alt="Jacket 1" />
+                <h3>Áo Khoác Jean</h3>
+                <p class="price">499.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Xanh • <i class="fas fa-tshirt"></i> M/L</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 3 -->
+            <article class="product-card">
+                <div class="product-badge sale">-30%</div>
+                <img src="https://tse2.mm.bing.net/th/id/OIP.UHxRYyQE9syx9wbn5kQ4awHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Dress 1" />
+                <h3>Váy Nữ Xinh</h3>
+                <p class="price"><span class="original-price">499.000₫</span> 349.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Đỏ • <i class="fas fa-tshirt"></i> S/M</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 4 -->
+            <article class="product-card">
+                <img src="https://th.bing.com/th/id/R.049045abb6b09508fdbe5c1bea25cc53?rik=I25NmzpFmAELKA&pid=ImgRaw&r=0" alt="Pants 1" />
+                <h3>Quần Jeans Nam</h3>
+                <p class="price">299.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Đen • <i class="fas fa-ruler"></i> 29/30/31</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 5 -->
+            <article class="product-card">
+                <div class="product-badge">Trending</div>
+                <img src="https://cf.shopee.vn/file/d0219727763a7ce8f0d2ea70997a4c14" alt="Hoodie 1" />
+                <h3>Áo Hoodie Nỉ</h3>
+                <p class="price">449.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Xám • <i class="fas fa-tshirt"></i> M/L/XL</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 6 -->
+            <article class="product-card">
+                <div class="product-badge sale">-20%</div>
+                <img src="https://tse1.mm.bing.net/th/id/OIP.ok_FlFIx8NbNTJsxvE1VBAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Skirt 1" />
+                <h3>Chân Váy Xếp Ly</h3>
+                <p class="price"><span class="original-price">349.000₫</span> 279.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Navy • <i class="fas fa-tshirt"></i> S/M</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 7 -->
+            <article class="product-card">
+                <img src="https://ann.com.vn/wp-content/uploads/mua-he-mac-ao-so-mi-nu-trang-dam-bao-tuoi-khong-can-tuoi-277-468.jpg" alt="Blouse 1" />
+                <h3>Áo Sơ Mi Nữ</h3>
+                <p class="price">329.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Trắng • <i class="fas fa-tshirt"></i> S/M/L</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product card 8 -->
+            <article class="product-card">
+                <div class="product-badge">Limited</div>
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.VNlL8HSiHpoi8iDEcSaLcQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Sweater 1" />
+                <h3>Áo Len Cổ Lọ</h3>
+                <p class="price">399.000₫</p>
+                <p class="meta"><i class="fas fa-palette"></i> Be • <i class="fas fa-tshirt"></i> Free size</p>
+                <div class="card-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-eye"></i> Xem
+                    </button>
+                    <button class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-store"></i> QUOCSHOP</h4>
+                <p>Thời trang sành điệu cho mọi người</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Thông Tin</h4>
+                <nav>
+                    <a href="#"><i class="fas fa-file-alt"></i> Chính sách</a>
+                    <a href="#"><i class="fas fa-phone"></i> Liên hệ</a>
+                    <a href="#"><i class="fas fa-book"></i> Hướng dẫn mua hàng</a>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h4>Dịch Vụ</h4>
+                <nav>
+                    <a href="#"><i class="fas fa-truck"></i> Giao hàng</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Đổi trả</a>
+                    <a href="#"><i class="fas fa-gift"></i> Quà tặng</a>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn" />
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 QUOCSHOP. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

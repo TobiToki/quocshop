@@ -1,0 +1,343 @@
+/* Simple stylish CSS for a clothing store login page */
+:root{
+    --brand:#ff6f61;
+    --accent:#333;
+    --bg-gradient: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    background: var(--bg-gradient);
+    color: var(--accent);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.card {
+    display: flex;
+    width: 920px;
+    max-width: 95%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--brand);
+}
+
+.card .left {
+    flex: 1.2;
+    background: linear-gradient(135deg, rgba(255,111,97,0.08), rgba(255,111,97,0.03));
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.brand h3 {
+    font-size: 24px;
+    color: var(--brand);
+    margin: 0;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
+    box-shadow: 0 8px 20px rgba(255,111,97,0.3);
+    position: relative;
+    transition: all 0.3s;
+}
+
+.logo:hover {
+    transform: rotate(10deg);
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+}
+
+.left h1 {
+    margin: 0;
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.left p {
+    opacity: 0.9;
+    line-height: 1.6;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.showcase {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 16px;
+}
+
+.showcase .tile {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    transition: all 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.showcase .tile i {
+    font-size: 20px;
+    color: var(--brand);
+}
+
+.showcase .tile span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.showcase .tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    background: white;
+}
+
+.showcase .tile:hover i {
+    transform: scale(1.2);
+}
+
+.card .right {
+    width: 420px;
+    padding: 48px;
+    background: white;
+    position: relative;
+}
+
+.right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.05), transparent);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.error-message {
+    background: #fdecea;
+    border: 1px solid #fdcdc7;
+    color: #f44336;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: shake 0.5s ease-in-out;
+}
+
+.error-message i {
+    font-size: 16px;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+label i {
+    color: var(--brand);
+}
+
+input[type='text'], 
+input[type='email'],
+input[type='password'] {
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    font-size: 15px;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 6px;
+    background-color: white;
+}
+
+input[type='text']:focus, 
+input[type='email']:focus,
+input[type='password']:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 4px rgba(255,111,97,0.1);
+}
+
+input[type='text']::placeholder, 
+input[type='email']::placeholder,
+input[type='password']::placeholder {
+    color: #aaa;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+input[type='submit'] {
+    background: var(--brand);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+input[type='submit']:hover {
+    background: #ff5a4c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255,111,97,0.3);
+}
+
+.muted {
+    font-size: 14px;
+    color: #888;
+}
+
+.footer-note {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-note a {
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer-note a:hover {
+    color: #ff5a4c;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    body {
+        align-items: flex-start;
+        padding: 2rem;
+    }
+    
+    .card {
+        flex-direction: column;
+        margin: 2rem 0;
+    }
+    
+    .card .right {
+        width: 100%;
+    }
+    
+    .right::before {
+        display: none;
+    }
+    
+    .showcase {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.brand {
+    animation: fadeIn 1s ease-out 0.2s both;
+}
+
+.left h1,
+.left p {
+    animation: fadeIn 1s ease-out 0.4s both;
+}
+
+.showcase {
+    animation: fadeIn 1s ease-out 0.6s both;
+}
+
+form {
+    animation: fadeIn 1s ease-out 0.8s both;
+}
