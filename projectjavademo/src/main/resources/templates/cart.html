@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        .cart-container { max-width: 900px; margin: 40px auto; }
+        .cart-item { display:flex; gap:16px; padding:12px; background:white; border-radius:8px; margin-bottom:12px; align-items:center; }
+        .cart-item img { width:80px; height:80px; object-fit:cover; border-radius:6px; }
+        .cart-item .meta { flex:1; }
+    </style>
+</head>
+<body>
+    <div class="container cart-container">
+        <h1>Giỏ hàng (<span th:text="${totalCount}">0</span> sản phẩm)</h1>
+
+        <div th:if="${items.empty}">
+            <p>Giỏ hàng trống.</p>
+        </div>
+
+        <div th:each="item,iterStat : ${items}">
+            <div class="cart-item">
+                <img th:if="${item.imageUrl}" th:src="${item.imageUrl}" alt="" onerror="this.src='https://via.placeholder.com/80x80?text=No+Image'" />
+                <div class="meta">
+                    <h3 th:text="${item.name}">Product name</h3>
+                    <div>Giá: <span th:text="${#numbers.formatDecimal(item.price,0,'COMMA',0,'POINT')}">0</span> ₫</div>
+                    <div>
+                        <form th:action="@{/cart/update}" method="post" style="display:inline-block; margin-right:8px;">
+                            <input type="hidden" name="productId" th:value="${item.id}" />
+                            <input type="number" name="quantity" min="0" th:value="${quantities[iterStat.index]}" style="width:70px; padding:6px;" />
+                            <button type="submit" class="btn-outline">Cập nhật</button>
+                        </form>
+                        <form th:action="@{/cart/remove}" method="post" style="display:inline-block;">
+                            <input type="hidden" name="productId" th:value="${item.id}" />
+                            <button type="submit" class="btn-primary">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:18px; text-align:right;">
+            <div style="font-size:18px; font-weight:700; margin-bottom:8px;">Tổng: <span th:text="${#numbers.formatDecimal(totalPrice,0,'COMMA',0,'POINT')}">0</span> ₫</div>
+            <form th:action="@{/cart/checkout}" method="post" style="display:inline-block;">
+                <button type="submit" class="btn-primary">Thanh toán</button>
+            </form>
+            <a th:href="@{/}" class="btn-outline" style="margin-left:8px;">Tiếp tục mua sắm</a>
+        </div>
+
+        <div th:if="${param.checkout} == 'success'" style="margin-top:12px; color:green; font-weight:600;">Thanh toán thành công. Giỏ hàng đã được làm trống.</div>
+    </div>
+</body>
+</html>

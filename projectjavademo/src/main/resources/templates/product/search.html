@@ -673,28 +673,31 @@
                 </div>
 
                 <div th:unless="${products.empty}" class="products-grid">
-                    <div th:each="product : ${products}" class="product-card">
-                        <div class="product-card-inner">
-                            <div class="product-image-wrapper">
-                                <img th:if="${product.imageUrl}" th:src="${product.imageUrl}" 
-                                     class="product-image" th:alt="${product.name}" />
-                                <img th:unless="${product.imageUrl}" 
-                                     src="https://via.placeholder.com/300x200?text=No+Image"
-                                     class="product-image" th:alt="${product.name}" />
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name" th:text="${product.name}">Product name</h3>
-                                <div class="product-category">
-                                    <i class="fas fa-tag"></i>
-                                    <span th:text="${product.category}">Category</span>
+                    <a th:each="product : ${products}" th:href="@{/products/{id}(id=${product.id})}" 
+                       style="text-decoration: none; color: inherit;">
+                        <div class="product-card">
+                            <div class="product-card-inner">
+                                <div class="product-image-wrapper">
+                                    <img th:if="${product.imageUrl}" th:src="${product.imageUrl}" 
+                                         class="product-image" th:alt="${product.name}" />
+                                    <img th:unless="${product.imageUrl}" 
+                                         src="https://via.placeholder.com/300x200?text=No+Image"
+                                         class="product-image" th:alt="${product.name}" />
                                 </div>
-                                <div class="product-price">
-                                    <span class="price-amount" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">0</span>
-                                    <span class="price-currency">₫</span>
+                                <div class="product-info">
+                                    <h3 class="product-name" th:text="${product.name}">Product name</h3>
+                                    <div class="product-category">
+                                        <i class="fas fa-tag"></i>
+                                        <span th:text="${product.category}">Category</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price-amount" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">0</span>
+                                        <span class="price-currency">₫</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </main>
         </div>

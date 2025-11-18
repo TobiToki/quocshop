@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjectjavademoApplication<projectjavademo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.quoctruong.projectjavademo.ProjectjavademoApplication",
+            "projectName": "projectjavademo",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DatabaseConnection<projectjavademo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.quoctruong.projectjavademo.DatabaseConnection",
+            "projectName": "projectjavademo",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

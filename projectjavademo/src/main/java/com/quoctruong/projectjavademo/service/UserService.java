@@ -42,4 +42,16 @@ public class UserService {
                 "INSERT INTO users (username, password) VALUES (?, ?)",
                 username, password);
     }
+
+    /**
+     * Update username and/or password for a user after verifying current credentials.
+     * Returns true if update succeeded (rows affected > 0).
+     */
+    public boolean updateUsernameAndPassword(String currentUsername, String currentPassword,
+                                             String newUsername, String newPassword) {
+        int updated = jdbc.update(
+                "UPDATE users SET username = ?, password = ? WHERE username = ? AND password = ?",
+                newUsername, newPassword, currentUsername, currentPassword);
+        return updated > 0;
+    }
 }
