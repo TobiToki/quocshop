@@ -148,6 +148,7 @@
             display: flex;
             gap: 12px;
             margin-bottom: 32px;
+            min-height: 50px;
         }
 
         .btn {
@@ -377,11 +378,14 @@
                     </div>
 
                     <div class="product-actions">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-heart"></i> Yêu thích
+                        <form method="post" th:action="@{/cart/add}" style="flex: 1;">
+                            <input type="hidden" name="productId" th:value="${product.id}" />
+                            <button type="submit" class="btn btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                            </button>
+                        </form>
+                        <button type="button" class="btn btn-secondary favorite-btn" th:data-product-id="${product.id}" style="flex: 1;">
+                            <i class="fas fa-heart"></i> <span class="favorite-text">Yêu thích</span>
                         </button>
                     </div>
 
@@ -458,6 +462,69 @@
             
             // Add active class to clicked button
             event.target.closest('.tab-button').classList.add('active');
+        }
+
+        // Favorite functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoriteBtn = document.querySelector('.favorite-btn');
+            const productId = favoriteBtn.getAttribute('data-product-id');
+            
+            // Check if product is already favorited
+            checkFavoriteStatus(productId);
+            
+            // Add click handler
+            favoriteBtn.addEventListener('click', function() {
+                toggleFavorite(productId);
+            });
+        });
+
+        function checkFavoriteStatus(productId) {
+            fetch(`/favorites/check?productId=${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    updateFavoriteButton(data.isFavorited);
+                })
+                .catch(error => console.error('Error checking favorite status:', error));
+        }
+
+        function toggleFavorite(productId) {
+            const favoriteBtn = document.querySelector('.favorite-btn');
+            const isFavorited = favoriteBtn.classList.contains('favorited');
+            
+            const url = isFavorited ? '/favorites/remove' : '/favorites/add';
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `productId=${productId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateFavoriteButton(data.isFavorited);
+                }
+            })
+            .catch(error => console.error('Error toggling favorite:', error));
+        }
+
+        function updateFavoriteButton(isFavorited) {
+            const favoriteBtn = document.querySelector('.favorite-btn');
+            const icon = favoriteBtn.querySelector('i');
+            const text = favoriteBtn.querySelector('.favorite-text');
+            
+            if (isFavorited) {
+                favoriteBtn.classList.add('favorited');
+                icon.style.color = '#ff6f61';
+                icon.style.fontWeight = 'bold';
+                text.textContent = 'Đã yêu thích';
+            } else {
+                favoriteBtn.classList.remove('favorited');
+                icon.style.color = 'inherit';
+                icon.style.fontWeight = 'normal';
+                text.textContent = 'Yêu thích';
+            }
         }
     </script>
 </body>

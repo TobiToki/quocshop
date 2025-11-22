@@ -55,3 +55,31 @@ CREATE TABLE IF NOT EXISTS order_items (
     subtotal DOUBLE NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
 );
+
+-- Create discounts table
+CREATE TABLE IF NOT EXISTS discounts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    discount_percent DOUBLE NOT NULL,
+    description VARCHAR(255),
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample discount codes
+INSERT INTO discounts (code, discount_percent, description, active) VALUES
+('WELCOME10', 10, 'Mã giảm giá 10% cho khách hàng mới', TRUE),
+('SUMMER20', 20, 'Mã giảm giá 20% mùa hè', TRUE),
+('VIP25', 25, 'Mã giảm giá 25% cho thành viên VIP', TRUE),
+('NEWYEAR30', 30, 'Mã giảm giá 30% dịp năm mới', TRUE);
+
+-- Create favorites table
+CREATE TABLE IF NOT EXISTS favorites (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    product_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_user_product (user_id, product_id),
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
