@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản - Cập nhật</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <a th:href="@{/}"><i class="fas fa-tshirt"></i> QUOCSHOP</a>
+            </div>
+            <nav class="main-nav">
+                <a th:href="@{/}">Trang chủ</a>
+            </nav>
+            <div class="actions">
+                <a class="cart" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container account-container">
+        <div class="account-card">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+                <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#ff8f7f);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h2>Cập nhật tài khoản</h2>
+                    <p class="lead">Thay đổi tên đăng nhập và mật khẩu của bạn an toàn.</p>
+                </div>
+            </div>
+
+            <div th:if="${error}" class="msg-error" th:text="${error}"></div>
+            <div th:if="${success}" class="msg-success" th:text="${success}"></div>
+
+            <form th:action="@{/account}" method="post">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Username hiện tại</label>
+                        <input class="form-control" type="text" name="currentUsername" required placeholder="Nhập username hiện tại" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu hiện tại</label>
+                        <input class="form-control" type="password" name="currentPassword" required placeholder="Mật khẩu hiện tại" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Username mới</label>
+                        <input class="form-control" type="text" name="newUsername" required placeholder="Username mới" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu mới</label>
+                        <input class="form-control" type="password" name="newPassword" required placeholder="Mật khẩu mới" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Xác nhận mật khẩu</label>
+                        <input class="form-control" type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" />
+                    </div>
+                    <div class="form-group note" style="align-self:center;">
+                        <p class="note">Mật khẩu nên có ít nhất 8 ký tự, gồm chữ và số.</p>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a th:href="@{/}" class="btn-outline">Hủy</a>
+                    <button type="submit" class="btn-primary">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

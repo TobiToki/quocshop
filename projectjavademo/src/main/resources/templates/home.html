@@ -17,18 +17,22 @@
                 QUOCSHOP
             </a>
         </div>
-        <nav class="main-nav">
+            <nav class="main-nav">
             <a th:href="@{/}" class="active">
                 <i class="fas fa-home"></i> Trang chủ
             </a>
-            <a href="#">
+            <!-- Gender filters: link to controller that filters by category substring -->
+            <a th:href="@{/products/gender/nam}">
                 <i class="fas fa-male"></i> Nam
             </a>
-            <a href="#">
+            <a th:href="@{/products/gender/nu}">
                 <i class="fas fa-female"></i> Nữ
             </a>
-            <a href="#" class="sale">
-                <i class="fas fa-tags"></i> Khuyến mãi
+            <a th:href="@{/favorites}">
+                <i class="fas fa-heart"></i> Đã thích
+            </a>
+            <a th:href="@{/orders}">
+                <i class="fas fa-receipt"></i> Đơn mua
             </a>
         </nav>
         <div class="actions">
@@ -67,17 +71,23 @@
         </div>
     </div>
 </form>
-            <a class="cart" href="#">
+            <a class="cart" th:href="@{/cart}">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
+                <span class="cart-count" th:text="${cartCount}">0</span>
             </a>
             <div class="auth-buttons">
                 <a class="btn-login" th:href="@{/login}">
                     <i class="fas fa-sign-in-alt"></i> Đăng nhập
                 </a>
+                
                 <a class="btn-logout" th:href="@{/logout}">
                     <i class="fas fa-sign-out-alt"></i> Đăng xuất
                 </a>
+                
+                <a class="btn-account" th:href="@{/account}">
+                    <i class="fas fa-user-cog"></i> Tài khoản
+                </a>
+
             </div>
         </div>
     </div>
@@ -119,12 +129,15 @@
                 <p class="price">199.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Trắng • <i class="fas fa-tshirt"></i> S/M/L</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/1" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="1" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
@@ -136,12 +149,15 @@
                 <p class="price">499.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Xanh • <i class="fas fa-tshirt"></i> M/L</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/2" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="2" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
@@ -153,12 +169,15 @@
                 <p class="price"><span class="original-price">499.000₫</span> 349.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Đỏ • <i class="fas fa-tshirt"></i> S/M</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/3" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="3" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
@@ -169,12 +188,15 @@
                 <p class="price">299.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Đen • <i class="fas fa-ruler"></i> 29/30/31</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/4" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="4" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
@@ -186,12 +208,15 @@
                 <p class="price">449.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Xám • <i class="fas fa-tshirt"></i> M/L/XL</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/5" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="5" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
@@ -203,45 +228,54 @@
                 <p class="price"><span class="original-price">349.000₫</span> 279.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Navy • <i class="fas fa-tshirt"></i> S/M</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/6" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="6" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
             <!-- Product card 7 -->
             <article class="product-card">
-                <img src="https://ann.com.vn/wp-content/uploads/mua-he-mac-ao-so-mi-nu-trang-dam-bao-tuoi-khong-can-tuoi-277-468.jpg" alt="Blouse 1" />
+                <img src="https://th.bing.com/th/id/R.a343e950f5ae6c1aba9711d82fa4f59a?rik=PHtoBBCAZby2uQ&pid=ImgRaw&r=0" alt="Blouse 1" />
                 <h3>Áo Sơ Mi Nữ</h3>
                 <p class="price">329.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Trắng • <i class="fas fa-tshirt"></i> S/M/L</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/7" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="7" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
 
             <!-- Product card 8 -->
             <article class="product-card">
                 <div class="product-badge">Limited</div>
-                <img src="https://tse1.explicit.bing.net/th/id/OIP.VNlL8HSiHpoi8iDEcSaLcQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Sweater 1" />
+                <img src="https://files.shopeeanalytics.com/upload/images/2021/11/15/ao-len-nu-dep-5.jpg" alt="Sweater 1" />
                 <h3>Áo Len Cổ Lọ</h3>
                 <p class="price">399.000₫</p>
                 <p class="meta"><i class="fas fa-palette"></i> Be • <i class="fas fa-tshirt"></i> Free size</p>
                 <div class="card-actions">
-                    <button class="btn-outline">
+                    <a href="/products/8" class="btn-outline">
                         <i class="fas fa-eye"></i> Xem
-                    </button>
-                    <button class="btn-primary">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
+                    </a>
+                    <form th:action="@{/cart/add}" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="8" />
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
             </article>
         </div>

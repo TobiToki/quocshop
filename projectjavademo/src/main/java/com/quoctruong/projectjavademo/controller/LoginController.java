@@ -16,14 +16,9 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @GetMapping({"/", "/login"})
+    @GetMapping({"/login"})
     public String loginForm() {
         return "login";
-    }
-
-    @GetMapping({"/home"})
-    public String home() {
-        return "/home";
     }
 
     @PostMapping("/login")
